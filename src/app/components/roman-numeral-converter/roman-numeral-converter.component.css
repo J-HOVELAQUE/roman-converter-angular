@@ -1,0 +1,39 @@
+.roman-numeral-converter {
+  background-color: #f8efd3;
+  border: 2px solid brown;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.converter-form {
+  margin: 30px 20px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.result-zone {
+  margin-bottom: 40px;
+}
+
+.converter-input {
+  margin-top: 15px;
+  margin-bottom: 25px;
+}
+
+.converter-button {
+  background-color: rgb(161, 93, 93);
+  color: aliceblue;
+  border-radius: 10px;
+}
+
+.converter-button:hover {
+  background-color: brown;
+}
+
+.result-zone {
+  color: red;
+  text-decoration: underline;
+}
