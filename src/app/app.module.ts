@@ -5,16 +5,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RomanNumeralConverterComponent } from './components/roman-numeral-converter/roman-numeral-converter.component';
 
+import { ReactiveFormsModule } from '@angular/forms';
+
 @NgModule({
-  declarations: [
-    AppComponent,
-    RomanNumeralConverterComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
+  declarations: [AppComponent, RomanNumeralConverterComponent],
+  imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
