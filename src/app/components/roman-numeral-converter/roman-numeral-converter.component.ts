@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 
+import { NumeralRepoService } from 'src/app/services/numeral-repo.service';
+
 @Component({
   selector: 'app-roman-numeral-converter',
   templateUrl: './roman-numeral-converter.component.html',
@@ -12,14 +14,27 @@ export class RomanNumeralConverterComponent implements OnInit {
     'i'
   );
 
+  convertingNumeral = '';
+
   romanNumeralForm = this._formBuider.group({
     romanNumeral: ['', [Validators.required, Validators.pattern(this.resrg)]],
   });
 
-  constructor(private _formBuider: FormBuilder) {}
+  constructor(
+    private _formBuider: FormBuilder,
+    private _numeralRepo: NumeralRepoService
+  ) {}
 
   public sendRomanNumeral() {
     console.log(this.romanNumeralForm.value);
+    const request = this._numeralRepo.convertRomanToArab(
+      this.romanNumeralForm.value.romanNumeral
+    );
+
+    const answer = request.subscribe((answer) => {
+      console.log(answer);
+      this.convertingNumeral = answer.nombreEnChiffreArabe;
+    });
   }
 
   ngOnInit(): void {}
