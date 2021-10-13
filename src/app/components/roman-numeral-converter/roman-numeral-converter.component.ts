@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-roman-numeral-converter',
@@ -7,8 +7,13 @@ import { FormBuilder } from '@angular/forms';
   styleUrls: ['./roman-numeral-converter.component.css'],
 })
 export class RomanNumeralConverterComponent implements OnInit {
+  private resrg = new RegExp(
+    '^M{0,4}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$',
+    'i'
+  );
+
   romanNumeralForm = this._formBuider.group({
-    romanNumeral: [''],
+    romanNumeral: ['', [Validators.required, Validators.pattern(this.resrg)]],
   });
 
   constructor(private _formBuider: FormBuilder) {}

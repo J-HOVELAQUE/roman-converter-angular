@@ -1,11 +1,18 @@
 <div class="roman-numeral-converter">
   <form class="converter-form" [formGroup]="romanNumeralForm">
-    <label for="roman-numerals-input" class="label converter-label">
+    <div class="control">
+      <label for="roman-numerals-input" class="label converter-label">
       Entrez le chiffre romain que vous souhaitez
       convertir
-    </label>
-    <input type="text" id="roman-numerals-input" class="input converter-input" formControlName="romanNumeral">
-    <button class="button" (click)="sendRomanNumeral()">Convertir</button>
+     </label>
+     <input type="text" 
+     id="roman-numerals-input" 
+     class="input converter-input" 
+     formControlName="romanNumeral" 
+     [class.is-success]="romanNumeralForm.valid" 
+     [class.is-danger]="romanNumeralForm.invalid">
+    </div>
+    <button class="button" (click)="sendRomanNumeral()" [disabled]="romanNumeralForm.invalid">Convertir</button>
   </form>
   <h3 class="result-zone">Résultat</h3>
 </div>

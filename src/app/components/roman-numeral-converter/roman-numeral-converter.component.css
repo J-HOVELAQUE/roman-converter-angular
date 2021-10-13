@@ -1,6 +1,6 @@
 .roman-numeral-converter {
-  background-color: #f8efd3;
-  border: 2px solid brown;
+  background-color: #fffcf2;
+  border: 2px solid black;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -23,18 +23,6 @@
   margin-bottom: 25px;
 }
 
-.converter-button {
-  background-color: rgb(161, 93, 93);
-  color: aliceblue;
-  border-radius: 10px;
-}
-
-.converter-button:hover {
-  background-color: brown;
-}
-
 .result-zone {
-  color: red;
-  text-decoration: underline;
   margin: 10px;
 }
