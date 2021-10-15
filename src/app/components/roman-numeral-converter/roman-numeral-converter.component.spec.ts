@@ -1,7 +1,7 @@
 import {
   ComponentFixture,
   TestBed,
-  TestBedStatic,
+  ComponentFixtureAutoDetect,
 } from '@angular/core/testing';
 
 import { RomanNumeralConverterComponent } from './roman-numeral-converter.component';
@@ -9,22 +9,32 @@ import { FormBuilder } from '@angular/forms';
 import { HttpClient, HttpHandler } from '@angular/common/http';
 import { NumeralRepoService } from '../../services/numeral-repo.service';
 import { Observable, of } from 'rxjs';
+import { DebugElement } from '@angular/core';
 
 describe('RomanNumeralConverterComponent', () => {
   let component: RomanNumeralConverterComponent;
   let fixture: ComponentFixture<RomanNumeralConverterComponent>;
   let numeralRepo: NumeralRepoService;
+  let templateInput: HTMLInputElement;
+  let hostElement: DebugElement;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [RomanNumeralConverterComponent],
-      providers: [FormBuilder, HttpClient, HttpHandler],
+      providers: [
+        FormBuilder,
+        HttpClient,
+        HttpHandler,
+        { provide: ComponentFixtureAutoDetect, useValue: true },
+      ],
     }).compileComponents();
   });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(RomanNumeralConverterComponent);
     component = fixture.componentInstance;
+    hostElement = fixture.debugElement;
+    templateInput = hostElement.nativeElement.querySelector('input');
     fixture.detectChanges();
 
     numeralRepo = TestBed.inject(NumeralRepoService);
@@ -56,5 +66,32 @@ describe('RomanNumeralConverterComponent', () => {
   it('testing form input valid', () => {
     component.romanNumeralForm.setValue({ romanNumeral: 'xvii' });
     expect(component.romanNumeralForm.valid).toBeTruthy();
+  });
+
+  ///////////// template
+  it('testing input valid content', async () => {
+    templateInput.value = 'vii';
+    component.romanNumeralForm.setValue({ romanNumeral: 'xvii' });
+
+    templateInput.dispatchEvent(new Event('input'));
+    fixture.detectChanges();
+
+    expect(templateInput.value).toBe('vii');
+    expect(templateInput.getAttribute('class')).toBe(
+      'input converter-input is-success'
+    );
+  });
+
+  it('testing input invalid content', async () => {
+    templateInput.value = 'viiii';
+    component.romanNumeralForm.setValue({ romanNumeral: 'xviiii' });
+
+    templateInput.dispatchEvent(new Event('input'));
+    fixture.detectChanges();
+
+    expect(templateInput.value).toBe('viiii');
+    expect(templateInput.getAttribute('class')).toBe(
+      'input converter-input is-danger'
+    );
   });
 });
