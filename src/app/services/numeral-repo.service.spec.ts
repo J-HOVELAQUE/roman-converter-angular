@@ -1,19 +1,24 @@
 import { TestBed } from '@angular/core/testing';
 
 import { NumeralRepoService } from './numeral-repo.service';
-import { HttpClient, HttpHandler } from '@angular/common/http';
+
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('NumeralRepoService', () => {
   let service: NumeralRepoService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [HttpClient, HttpHandler],
+      imports: [HttpClientTestingModule],
     });
     service = TestBed.inject(NumeralRepoService);
   });
 
   it('should be created', () => {
     expect(service).toBeTruthy();
+  });
+
+  it('method implementation', () => {
+    expect(service.convertRomanToArab('test')).not.toBeUndefined();
   });
 });

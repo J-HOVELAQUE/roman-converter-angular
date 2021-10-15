@@ -42,4 +42,19 @@ describe('RomanNumeralConverterComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('testing set answer at return service', () => {
+    component.sendRomanNumeral();
+    expect(component.convertingNumeral).toEqual('10');
+  });
+
+  it('testing form input invalid', () => {
+    component.romanNumeralForm.setValue({ romanNumeral: 'dg' });
+    expect(component.romanNumeralForm.valid).toBeFalsy();
+  });
+
+  it('testing form input valid', () => {
+    component.romanNumeralForm.setValue({ romanNumeral: 'xvii' });
+    expect(component.romanNumeralForm.valid).toBeTruthy();
+  });
 });
